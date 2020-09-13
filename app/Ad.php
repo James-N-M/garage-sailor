@@ -6,6 +6,8 @@ use Carbon\Carbon;
 
 class Ad extends Model
 {
+    use Commentable;
+
     public function scopeUpcoming($query)
     {
         return $query->whereDate('start_date_time', '>=', Carbon::today()->toDateString());
