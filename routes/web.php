@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 use App\Http\Controllers\AdsController;
+use App\Http\Controllers\AdCommentsController;
 use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\ContactAdCreatorController;
 use App\Http\Controllers\UpcomingUserAdsController;
@@ -31,6 +32,8 @@ Route::group(['middleware' => 'auth'],function () {
     Route::patch('/ads/{ad}', [AdsController::class, 'update']);
     Route::post('/ads', [AdsController::class, 'store']);
     Route::delete('/ads/{ad}', [AdsController::class, 'destroy']);
+
+    Route::post('/ads/{ad}/comments', [AdCommentsController::class, 'store']);
 
     Route::post('/items/{ad}', [ItemsController::class, 'store']);
     Route::patch('/items/{item}', [ItemsController::class, 'update']);

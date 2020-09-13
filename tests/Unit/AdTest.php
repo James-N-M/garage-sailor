@@ -39,4 +39,14 @@ class AdTest extends TestCase
 
         $this->assertTrue($ad->items->contains($item));
     }
+    
+    /** @test */
+    public function it_can_receive_a_comments()
+    {
+        $ad = factory(Ad::class)->create();
+
+        $ad->addComment('Foo comment');
+
+        $this->assertCount(1, $ad->comments);
+    }
 }
