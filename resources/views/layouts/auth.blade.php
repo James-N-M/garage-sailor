@@ -20,25 +20,13 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
+<div id="app">
 
-        @include ('_nav_bar')
+    @include ('_nav_bar')
 
-        <main class="py-4">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-3">
-                        @include ('_sidebar-links')
-                    </div>
-                    <div class="col-6">
-                        @yield('content')
-                    </div>
-                    <div class="col-3 bg-secondary">
-                        3
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
+    <main class="py-4">
+        @yield('content')
+    </main>
+</div>
 </body>
 </html>

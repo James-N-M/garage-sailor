@@ -19,8 +19,6 @@ class ItemsTest extends TestCase
     /** @test */
     public function a_guest_can_view_items()
     {
-        $this->withoutExceptionHandling();
-
         $items = factory(Item::class, 5)->create();
 
         $this->get('/items')->assertOk()->assertSee($items->first()->name);

@@ -12,6 +12,14 @@ class PlannerTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
+    public function it_has_a_path()
+    {
+        $planner = factory(Planner::class)->create();
+
+        $this->assertEquals('/planners/' . $planner->id, $planner->path());
+    }
+
+    /** @test */
     public function it_can_add_an_ad()
     {
         $planner = factory(Planner::class)->create();

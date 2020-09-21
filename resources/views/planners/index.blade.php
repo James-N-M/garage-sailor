@@ -1,11 +1,12 @@
 @extends('layouts.app')
 
-Planners Index page
-
-@forelse($planners as $planner)
-    <div>
-        {{ $planner->name }}
-    </div>
-@empty
-    <p>No planners to view</p>
-@endforelse
+@section('content')
+    <h1>Planners</h1>
+    <ul>
+        @forelse ($planners as $planner)
+            <a href="{{ $planner->path() }}">{{ $planner->name }}</a>
+        @empty
+            <p>No Planners yet.</p>
+        @endforelse
+    </ul>
+@endsection
