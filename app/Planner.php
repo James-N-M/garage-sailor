@@ -4,6 +4,11 @@ namespace App;
 
 class Planner extends Model
 {
+    public function path()
+    {
+        return "/planners/{$this->id}";
+    }
+
     public function addAd($ad)
     {
         return $this->ads()->create($ad);

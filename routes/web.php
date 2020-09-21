@@ -23,9 +23,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/ads', [AdsController::class, 'index']);
-Route::get('/items', [ItemsController::class, 'index']);
-
 Route::group(['middleware' => 'auth'],function () {
     Route::get('/ads/create', [AdsController::class, 'create']);
     Route::get('/ads/edit/{ad}', [AdsController::class, 'edit']);
@@ -47,6 +44,10 @@ Route::group(['middleware' => 'auth'],function () {
     Route::get('/planners/create', [PlannersController::class, 'create']);
     Route::post('/planners', [PlannersController::class, 'store']);
 });
+
+Route::get('/ads', [AdsController::class, 'index']);
+Route::get('/items', [ItemsController::class, 'index']);
+Route::get('/ads/{ad}', [AdsController::class, 'show']);
 
 Auth::routes();
 

@@ -14,6 +14,11 @@ class AdsController extends Controller
         return view('ads.index')->with('ads', $ads);
     }
 
+    public function show(Ad $ad)
+    {
+        return view('ads.show',compact('ad'));
+    }
+
     public function create()
     {
         return view('ads.create');

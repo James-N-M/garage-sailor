@@ -1,11 +1,12 @@
 @extends('layouts.app')
 
-Items Index page
-
-@forelse($items as $item)
-    <div>
-        {{ $item->name }}
-    </div>
-@empty
-    <p>No items to view</p>
-@endforelse
+@section('content')
+    <h1>Items</h1>
+    <ul>
+        @forelse ($items as $item)
+            <a href="{{ $item->path() }}">{{ $item->name }}</a>
+        @empty
+            <p>No Items yet.</p>
+        @endforelse
+    </ul>
+@endsection

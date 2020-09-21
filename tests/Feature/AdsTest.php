@@ -30,6 +30,15 @@ class AdsTest extends TestCase
     }
 
     /** @test */
+    public function a_guest_can_view_an_ad()
+    {
+        $ad = factory(Ad::class)->create();
+
+        $this->get( $ad->path() )->assertOk()->assertSee($ad->name);
+    }
+
+
+    /** @test */
     public function an_authenticated_user_can_create_an_ad()
     {
         $this->signIn();
