@@ -25,6 +25,14 @@ class ItemsTest extends TestCase
     }
 
     /** @test */
+    public function a_guest_can_view_an_item()
+    {
+        $item = factory(Item::class)->create();
+
+        $this->get( $item->path() )->assertOk()->assertSee($item->name);
+    }
+
+    /** @test */
     public function an_authenticated_user_can_add_an_item_to_their_ad()
     {
         $user = $this->signIn();

@@ -30,11 +30,10 @@
                 class="mb-4"
                 href="/planners"
             >
-                Planners
+                My Planners
             </a>
             <ul>
-                <li>Create Planer</li>
-                <li>My Planners</li>
+                <a href="/planners/create"><li>Create Planer</li></a>
             </ul>
     @endauth
 

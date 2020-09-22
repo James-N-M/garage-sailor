@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Planner;
 
 class PlannersController extends Controller
 {
@@ -11,6 +12,11 @@ class PlannersController extends Controller
         $planners = auth()->user()->planners()->get();
 
         return view('planners.index', compact('planners'));
+    }
+
+    public function show(Planner $planner)
+    {
+        return view('planners.show', compact('planner'));
     }
 
     public function create()

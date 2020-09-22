@@ -28,13 +28,23 @@ class PlannersTest extends TestCase
     /** @test */
     public function authenticated_users_can_view_their_planners()
     {
-        $this->withoutExceptionHandling();
-
         $user = $this->signIn();
 
         $planners = factory(Planner::class, 5)->create(['creator_id' => $user->id]);
 
         $this->get('/planners')->assertOk()->assertSee($planners->first()->name);
+    }
+
+    /** @test */
+    public function authenticated_users_can_view_one_of_their_planners()
+    {
+        $this->withoutExceptionHandling();
+
+        $user = $this->signIn();
+
+        $planner = factory(Planner::class)->create(['creator_id' => $user->id]);
+
+        $this->get('/planners/' . $planner->id)->assertOk()->assertSee($planner->name);
     }
 
     /** @test */

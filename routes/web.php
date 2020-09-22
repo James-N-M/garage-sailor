@@ -42,12 +42,15 @@ Route::group(['middleware' => 'auth'],function () {
 
     Route::get('/planners', [PlannersController::class, 'index']);
     Route::get('/planners/create', [PlannersController::class, 'create']);
+    Route::get('/planners/{planner}', [PlannersController::class, 'show']);
     Route::post('/planners', [PlannersController::class, 'store']);
 });
 
 Route::get('/ads', [AdsController::class, 'index']);
 Route::get('/items', [ItemsController::class, 'index']);
 Route::get('/ads/{ad}', [AdsController::class, 'show']);
+Route::get('/items/{item}', [ItemsController::class, 'show']);
+
 
 Auth::routes();
 

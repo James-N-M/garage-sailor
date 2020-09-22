@@ -14,6 +14,11 @@ class ItemsController extends Controller
         return view('items.index')->with('items', $items);
     }
 
+    public function show(Item $item)
+    {
+        return view('items.show')->with('item', $item);
+    }
+
     public function update(Item $item)
     {
         $item->update(request()->all());

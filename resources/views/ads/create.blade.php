@@ -25,6 +25,12 @@
             <label for="exampleInputPassword1">address</label>
             <input type="text" class="form-control" id="exampleInputPassword1" name="address">
         </div>
+
+        <div class="form-group">
+            <label for="exampleInputPassword1">item name</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" name="items[0][name]">
+        </div>
+
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 @endsection
