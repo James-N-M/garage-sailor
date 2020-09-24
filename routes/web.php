@@ -18,6 +18,7 @@ use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\ContactAdCreatorController;
 use App\Http\Controllers\UpcomingUserAdsController;
 use App\Http\Controllers\PlannersController;
+use App\Http\Controllers\AdPlannerController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -44,6 +45,8 @@ Route::group(['middleware' => 'auth'],function () {
     Route::get('/planners/create', [PlannersController::class, 'create']);
     Route::get('/planners/{planner}', [PlannersController::class, 'show']);
     Route::post('/planners', [PlannersController::class, 'store']);
+
+    Route::post('/planners/{planner}/ads/{ad}', [AdPlannerController::class, 'store']);
 });
 
 Route::get('/ads', [AdsController::class, 'index']);

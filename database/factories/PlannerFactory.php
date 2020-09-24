@@ -11,6 +11,6 @@ $factory->define(Planner::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'creator_id' => factory(User::class),
-        'date' => Carbon::now()->addDay(), // creating a planner for tomorrow
+        'date' => Carbon::now(), // creating a planner for tomorrow
     ];
 });

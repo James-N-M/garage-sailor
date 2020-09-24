@@ -38,8 +38,8 @@ class AdCommentsTest extends TestCase
             'reply_to_id' => $comment->id
         ]);
 
-        $this->assertCount(2, $ad->comments);
+        $this->assertCount(1, $comment->replies);
 
-        $this->assertTrue($ad->comments->last()->parent->is($comment));
+        $this->assertTrue($comment->replies->first()->parent->is($comment));
     }
 }

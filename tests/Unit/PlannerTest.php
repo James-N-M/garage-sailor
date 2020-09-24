@@ -24,7 +24,7 @@ class PlannerTest extends TestCase
     {
         $planner = factory(Planner::class)->create();
 
-        $ad = $planner->addAd(factory(Ad::class)->make()->toArray());
+        $planner->addAd($ad = factory(Ad::class)->create());
 
         $this->assertCount(1, $planner->ads);
 
@@ -36,7 +36,7 @@ class PlannerTest extends TestCase
     {
         $planner = factory(Planner::class)->create();
 
-        $ad = $planner->addAd(factory(Ad::class)->make()->toArray());
+        $planner->addAd($ad = factory(Ad::class)->create());
 
         $this->assertTrue($planner->ads->contains($ad));
 

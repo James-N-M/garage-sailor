@@ -9,14 +9,14 @@ class Planner extends Model
         return "/planners/{$this->id}";
     }
 
-    public function addAd($ad)
+    public function addAd(Ad $ad)
     {
-        return $this->ads()->create($ad);
+        $this->ads()->attach($ad);
     }
 
     public function removeAd(Ad $ad)
     {
-        return $this->ads()->detach($ad->id);
+        $this->ads()->detach($ad);
     }
 
     public function ads()

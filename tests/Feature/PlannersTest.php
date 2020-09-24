@@ -3,6 +3,8 @@
 namespace Tests\Feature;
 
 use App\Planner;
+use App\Ad;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -38,7 +40,6 @@ class PlannersTest extends TestCase
     /** @test */
     public function authenticated_users_can_view_one_of_their_planners()
     {
-        $this->withoutExceptionHandling();
 
         $user = $this->signIn();
 
@@ -59,5 +60,21 @@ class PlannersTest extends TestCase
         $this->post('/planners', $planner->toArray())->assertSuccessful();
 
         $this->assertDatabaseHas('planners', ['name' => $planner->name]);
+    }
+
+    /** @test */
+    public function authenticated_users_can_add_ad_to_planner()
+    {
+        $user = $this->signIn();
+
+        $planner = factory(Planner::class)->create(['creator_id' => $user->id]);
+
+        $ad = factory(Ad::class)->create();
+
+        // TODO assert that users see the ad on the planner show page
+
+        $this->post('/planners/' . $planner->id . '/ads/' . $ad->id)->assertSuccessful();
+
+        $this->assertDatabaseHas('ad_planner', ['planner_id' => $planner->id, 'ad_id' => $ad->id]);
     }
 }
