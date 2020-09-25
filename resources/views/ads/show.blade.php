@@ -8,7 +8,7 @@
     <a href="/ads">Back to ads</a>
 
     <h2>Ad Comments</h2>
-    <form method="POST" action="/ads/{{$ad->id}}/comments">
+    <form method="POST" action="{{$ad->path()}}/comments">
         @csrf
         <div class="form-group">
             <label for="body">body</label>
@@ -27,7 +27,7 @@
                     <p>No comment replies yet.</p>
                 @endforelse
             </ul>
-            <form method="POST" action="/ads/{{$ad->id}}/comments">
+            <form method="POST" action="{{$ad->path()}}/comments">
                 @csrf
                 <div>
                     <label for="body">reply to comment</label>

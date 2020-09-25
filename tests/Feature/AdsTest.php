@@ -24,6 +24,8 @@ class AdsTest extends TestCase
     /** @test */
     public function a_guest_can_view_ads()
     {
+        $this->withoutExceptionHandling();
+
         $ads = factory(Ad::class, 5)->create();
 
         $this->get('/ads')->assertOk()->assertSee($ads->first()->name);

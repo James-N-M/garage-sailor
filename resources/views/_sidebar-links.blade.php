@@ -8,7 +8,9 @@
         </a>
         <ul>
             <a href="/ads/create"><li>Create Ad</li></a>
-            <li>My Ads</li>
+            @auth
+                <a href="/users/{{auth()->user()->id}}/ads"><li>My Ads</li></a>
+            @endauth
         </ul>
     </li>
 

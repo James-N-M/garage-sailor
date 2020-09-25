@@ -9,6 +9,6 @@ use Faker\Generator as Faker;
 $factory->define(Item::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
-        'ad_id' => factory(Ad::class)
+        'ad_id' => factory(Ad::class),
     ];
 });

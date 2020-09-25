@@ -29,7 +29,7 @@ class ContactAdCreatorTest extends TestCase
 
         $this->signIn();
 
-        $this->post("/contact/ads/{$ad->id}", ['body' => "Hello are you selling any golf clubs"])
+        $this->post("/contact" . $ad->path(), ['body' => "Hello are you selling any golf clubs"])
             ->assertRedirect();
 
         \Mail::assertSent(ContactAdCreator::class, function ($mail) use ($creator) {

@@ -17,7 +17,7 @@ class AdCommentsTest extends TestCase
 
         $ad = factory(Ad::class)->create();
 
-        $this->post('/ads/' . $ad->id . '/comments', [
+        $this->post($ad->path() . '/comments', [
             'body' => 'Foo comment'
         ]);
 
@@ -33,7 +33,7 @@ class AdCommentsTest extends TestCase
 
         $comment = $ad->addComment('Foo comment');
 
-        $this->post('/ads/' . $ad->id . '/comments', [
+        $this->post($ad->path() . '/comments', [
             'body' => 'Replying to foo comment',
             'reply_to_id' => $comment->id
         ]);

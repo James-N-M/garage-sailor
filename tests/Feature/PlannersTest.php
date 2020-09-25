@@ -73,7 +73,7 @@ class PlannersTest extends TestCase
 
         // TODO assert that users see the ad on the planner show page
 
-        $this->post('/planners/' . $planner->id . '/ads/' . $ad->id)->assertSuccessful();
+        $this->post('/planners/' . $planner->id . $ad->path())->assertSuccessful();
 
         $this->assertDatabaseHas('ad_planner', ['planner_id' => $planner->id, 'ad_id' => $ad->id]);
     }

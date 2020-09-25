@@ -26,4 +26,5 @@ class ItemTest extends TestCase
 
         $this->assertInstanceOf(Ad::class, $item->ad);
     }
+
 }
