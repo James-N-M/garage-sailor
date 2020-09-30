@@ -14,11 +14,9 @@ class UserItemsTest extends TestCase
     /** @test */
     public function an_authenticated_user_can_view_their_items()
     {
-        $this->withoutExceptionHandling();
-
         $user = $this->signIn();
 
-        $ad = factory(Ad::class)->create();
+        $ad = factory(Ad::class)->create(['creator_id' => $user]);
 
         $items = factory(Item::class, 3)->create(['ad_id' => $ad->id]);
 

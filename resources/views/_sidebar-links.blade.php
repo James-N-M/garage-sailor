@@ -22,7 +22,9 @@
             Items
         </a>
         <ul>
-            <li>My Items</li>
+            @auth
+            <a href="/users/{{auth()->user()->id}}/items"><li>My Items</li></a>
+            @endauth
         </ul>
     </li>
 
@@ -43,7 +45,7 @@
         <li>
             <a
                 class="mb-4"
-                href="#"
+                href="/users"
             >
                 Sailors
             </a>
