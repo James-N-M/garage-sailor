@@ -4,7 +4,7 @@
     <h1>Items</h1>
     <ul>
         @forelse ($items as $item)
-            <a href="{{ $item->path() }}">{{ $item->name }}</a>
+            <li><a href="{{ $item->path() }}">{{ $item->name }}</a></li>
         @empty
             <p>No Items yet.</p>
         @endforelse

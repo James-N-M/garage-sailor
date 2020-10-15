@@ -40,7 +40,6 @@ class PlannersTest extends TestCase
     /** @test */
     public function authenticated_users_can_view_one_of_their_planners()
     {
-
         $user = $this->signIn();
 
         $planner = factory(Planner::class)->create(['creator_id' => $user->id]);
@@ -70,8 +69,6 @@ class PlannersTest extends TestCase
         $planner = factory(Planner::class)->create(['creator_id' => $user->id]);
 
         $ad = factory(Ad::class)->create();
-
-        // TODO assert that users see the ad on the planner show page
 
         $this->post('/planners/' . $planner->id . $ad->path())->assertSuccessful();
 

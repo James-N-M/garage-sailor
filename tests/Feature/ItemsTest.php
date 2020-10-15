@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Ad;
+use App\Category;
 use App\Item;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -44,6 +45,22 @@ class ItemsTest extends TestCase
         $this->post("/items/{$ad->id}", ['item' => $item->toArray()])->assertSuccessful();
 
         $this->assertDatabaseHas('items', ['name' => $item->name, 'ad_id' => $ad->id]);
+    }
+
+    /** @test */
+    public function an_authenticated_user_can_add_an_item_with_a_category_to_their_ad()
+    {
+        $user = $this->signIn();
+
+        $ad = factory(Ad::class)->create(['creator_id' => $user->id]);
+
+        $category = factory(Category::class)->create();
+
+        $item = factory(Item::class)->make(['category_id' => $category->id]);
+
+        $this->post("/items/{$ad->id}", ['item' => $item->toArray()])->assertSuccessful();
+
+        $this->assertDatabaseHas('items', ['name' => $item->name, 'category_id' => $category->id]);
     }
 
     /** @test */

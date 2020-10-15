@@ -44,4 +44,5 @@ class PlannerTest extends TestCase
 
         $this->assertDatabaseMissing('ad_planner', ['ad_id' => $ad->id, 'planner_id' => $planner->id]);
     }
+
 }

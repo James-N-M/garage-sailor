@@ -21,9 +21,7 @@ class PlannersController extends Controller
 
     public function show(Planner $planner)
     {
-        $ads = Ad::whereDate('start_date_time', $planner->date)->get();
-
-        return view('planners.show', compact('planner', 'ads'));
+        return view('planners.show', compact('planner'));
     }
 
     public function create()

@@ -15,18 +15,4 @@
         @endforelse
     </ul>
 
-    <h3>Ads on that date</h3>
-
-    <ul>
-        @foreach($ads as $ad)
-            <form method="POST"
-                  action="/planners/{{$planner->id}}{{$ad->path()}}"
-            >
-                @csrf
-                <li>{{ $ad->name }}</li>
-                <button class="btn btn-primary">Add to planner</button>
-            </form>
-        @endforeach
-    </ul>
-
 @endsection

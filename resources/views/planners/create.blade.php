@@ -17,4 +17,7 @@
 
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+
+    <!-- Able to create a planner with ads -->
+    <!-- drop down on change ajax request to load ads for that day make them selectable-->
 @endsection
