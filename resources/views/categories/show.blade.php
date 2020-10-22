@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Items</h1>
+    <h1>{{ $category->name }}</h1>
     <ul>
         @forelse ($items as $item)
             <li><a href="{{ $item->path() }}">{{ $item->name }}</a></li>
@@ -9,6 +9,4 @@
             <p>No Items yet.</p>
         @endforelse
     </ul>
-
-    {{ $items->links() }}
 @endsection

@@ -13,7 +13,7 @@ class ItemsWithCategorySeeder extends Seeder
      */
     public function run()
     {
-        $categories = factory(Category::class, 10)->create();
+        $categories = Category::all();
 
         foreach($categories as $category) {
             factory(Item::class, 5)->create(['category_id' => $category->id]);

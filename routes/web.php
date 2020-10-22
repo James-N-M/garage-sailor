@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 use App\Http\Controllers\AdsController;
 use App\Http\Controllers\AdCommentsController;
 use App\Http\Controllers\ItemsController;
@@ -22,6 +23,7 @@ use App\Http\Controllers\AdPlannerController;
 use App\Http\Controllers\UserAdsController;
 use App\Http\Controllers\UserItemsController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\CategoriesController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -57,12 +59,14 @@ Route::group(['middleware' => 'auth'],function () {
     Route::post('/planners/{planner}/ads/{ad}', [AdPlannerController::class, 'store']);
 });
 
-Route::get('/ads', [AdsController::class, 'index']);
+Route::get('/ads', [AdsController::class, 'index'])->name('home');
 Route::get('/items', [ItemsController::class, 'index']);
+Route::get('/categories', [CategoriesController::class, 'index']);
 Route::get('/ads/{ad}', [AdsController::class, 'show']);
 Route::get('/items/{item}', [ItemsController::class, 'show']);
+Route::get('/categories/{category}', [CategoriesController::class, 'show']);
 
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');

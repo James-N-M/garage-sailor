@@ -12,6 +12,14 @@ class CategoryTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
+    public function it_has_a_path()
+    {
+        $category = factory(Category::class)->create();
+
+        $this->assertEquals('/categories/' . $category->id, $category->path());
+    }
+
+    /** @test */
     public function it_belongs_to_many_items()
     {
         $category = factory(Category::class)->create();
@@ -20,6 +28,4 @@ class CategoryTest extends TestCase
 
         $this->assertInstanceOf(Item::class, $category->items->first());
     }
-
-
 }

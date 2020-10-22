@@ -28,6 +28,22 @@
         </ul>
     </li>
 
+    <li>
+        <a
+            class="mb-4"
+            href="/categories"
+        >
+            Categories
+        </a>
+        <ul>
+            @forelse ($categories as $category)
+                <li><a href="/categories/{{$category->id}}">{{$category->name}}</a></li>
+            @empty
+                <p>No categories yet.</p>
+            @endforelse
+        </ul>
+    </li>
+
     @auth
         <li>
             <a

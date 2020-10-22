@@ -12,6 +12,6 @@ class ItemsSeeder extends Seeder
      */
     public function run()
     {
-        factory(Item::class, 25)->create();
+        factory(Item::class, 25)->create(['category_id' => null]);
     }
 }

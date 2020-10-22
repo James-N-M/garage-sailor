@@ -9,7 +9,7 @@ class AdsController extends Controller
 {
     public function index()
     {
-        $ads = Ad::all();
+        $ads = Ad::paginate(15);
 
         return view('ads.index')->with('ads', $ads);
     }
