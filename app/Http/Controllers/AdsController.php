@@ -9,7 +9,7 @@ class AdsController extends Controller
 {
     public function index()
     {
-        $ads = Ad::paginate(15);
+        $ads = Ad::paginate(6);
 
         return view('ads.index')->with('ads', $ads);
     }
@@ -59,7 +59,7 @@ class AdsController extends Controller
             $ad->addItem($item);
         }
 
-        return "ad created";
+        return redirect($ad->path());
     }
 
     public function destroy(Ad $ad)

@@ -19,5 +19,4 @@ class CategoriesController extends Controller
             ->with('category', $category)
             ->with('items', $category->items);
     }
-
 }

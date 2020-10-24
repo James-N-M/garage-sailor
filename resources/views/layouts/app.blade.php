@@ -16,8 +16,12 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/405f035cb5.js" crossorigin="anonymous"></script>
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/styles/side-bar.css') }}">
 </head>
 <body>
     <div id="app">
@@ -33,8 +37,8 @@
                     <div class="col-6">
                         @yield('content')
                     </div>
-                    <div class="col-3 bg-secondary">
-                        3
+                    <div class="col-3">
+                        @include('_right_sidebar')
                     </div>
                 </div>
             </div>

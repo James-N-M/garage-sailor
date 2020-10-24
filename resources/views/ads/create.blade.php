@@ -1,7 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Create Ad</h1>
+    <bread-crumbs
+        v-bind:crumbs="{{ json_encode([ ['name' => 'Ads' , 'link' => '/ads', 'active' => false], ['name' => 'Create Ad' , 'link' => '', 'active' => true] ]) }}"
+    >
+    </bread-crumbs>
 
     <form method="POST" action="/ads">
         @csrf
@@ -26,10 +29,7 @@
             <input type="text" class="form-control" id="exampleInputPassword1" name="address">
         </div>
 
-        <div class="form-group">
-            <label for="exampleInputPassword1">item name</label>
-            <input type="text" class="form-control" id="exampleInputPassword1" name="items[0][name]">
-        </div>
+        <create-items></create-items>
 
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

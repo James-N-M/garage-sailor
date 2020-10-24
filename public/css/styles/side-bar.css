@@ -1,0 +1,27 @@
+.sidebar {
+    overflow: hidden;
+    height: 100vh;
+    padding-bottom: 60px;
+}
+
+.sidebar:hover {
+    overflow-y: scroll;
+}
+
+.sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    color: black;
+}
+
+@media screen and (max-height: 450px) {
+    .sidebar {padding-top: 15px;}
+    .sidebar a {font-size: 18px;}
+}

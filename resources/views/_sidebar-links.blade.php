@@ -1,7 +1,7 @@
-<ul>
+<div class="sidebar list-unstyled">
     <li>
         <a
-            class="mb-4"
+            class="mb-2 bg-dark"
             href="{{ route('home') }}"
         >
             Ads
@@ -16,7 +16,7 @@
 
     <li>
         <a
-            class="mb-4"
+            class="mb-2 bg-dark"
             href="/items"
         >
             Items
@@ -30,7 +30,7 @@
 
     <li>
         <a
-            class="mb-4"
+            class="mb-2 bg-dark"
             href="/categories"
         >
             Categories
@@ -47,7 +47,7 @@
     @auth
         <li>
             <a
-                class="mb-4"
+                class="mb-2 bg-dark"
                 href="/planners"
             >
                 My Planners
@@ -60,10 +60,10 @@
     @auth
         <li>
             <a
-                class="mb-4"
+                class="mb-2 bg-dark"
                 href="/users"
             >
                 Sailors
             </a>
     @endauth
-</ul>
+</div>

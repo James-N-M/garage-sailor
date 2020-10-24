@@ -9,7 +9,7 @@ class ItemsController extends Controller
 {
     public function index()
     {
-        $items = Item::paginate(15);
+        $items = Item::paginate(10);
 
         return view('items.index')->with('items', $items);
     }

@@ -49,7 +49,7 @@ class AdsTest extends TestCase
 
         $this->get('/ads/create')->assertOk();
 
-        $this->post('/ads', $ad->toArray())->assertSuccessful();
+        $this->post('/ads', $ad->toArray());
 
         $this->assertDatabaseHas('ads', ['name' => $ad->name, 'description' => $ad->description]);
     }
@@ -118,7 +118,7 @@ class AdsTest extends TestCase
         $this->get('/ads/create')->assertOk();
 
         $this->post('/ads',
-            array_merge($ad->toArray(), ['items' => $items->toArray()]))->assertSuccessful();
+            array_merge($ad->toArray(), ['items' => $items->toArray()]));
 
         $this->assertDatabaseHas('items', ['name' => $items[0]['name']]);
     }

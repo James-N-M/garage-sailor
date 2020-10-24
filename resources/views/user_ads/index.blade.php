@@ -1,13 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>My Ads</h1>
-    <ul>
-        @forelse ($ads as $ad)
-            <a href="{{ $ad->path() }}">{{ $ad->name }}</a>
-        @empty
-            <p>You have not created any ads yet.</p>
-            <a href="/ads/create">Create ad</a>
-        @endforelse
-    </ul>
+    <bread-crumbs
+        v-bind:crumbs="{{ json_encode([ ['name' => 'Ads' , 'link' => '/ads', 'active' => false], ['name' => 'My Ads' , 'link' => '', 'active' => true] ]) }}"
+    >
+    </bread-crumbs>
+
+    @include('_ads')
+
 @endsection

@@ -124,7 +124,7 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">Search for Items</h5>
-                            <p class="card-text">Find the items your looking !</p>
+                            <p class="card-text">Find the items your looking for!</p>
                             <a href="/categories" class="btn btn-primary">Categories</a>
                         </div>
                         <div class="card-footer text-muted">
