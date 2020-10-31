@@ -8,7 +8,7 @@
             <img src="https://via.placeholder.com/150" alt="placeholder image">
         </div>
         <div>
-            <a href="#"><h4>{{ $ad->name }}</h4></a>
+            <a href="{{ $ad->path() }}"><h4>{{ $ad->name }}</h4></a>
 
             <div>
                 <i class="fas fa-map-pin mr-2"></i>

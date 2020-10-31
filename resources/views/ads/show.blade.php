@@ -1,13 +1,36 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Ad Detail Page</h1>
-    Name: {{ $ad->name }}
-    Description: {{ $ad->description }}
+    <bread-crumbs
+        v-bind:crumbs="{{ json_encode([ ['name' => 'Ads' , 'link' => '/ads', 'active' => false], ['name' =>  $ad->name, 'link' => '', 'active' => true] ]) }}"
+    >
+    </bread-crumbs>
 
-    <a href="/ads">Back to ads</a>
+    <p style="color: red; ">OCT 30 AT 7 PM EDT – NOV 1 AT 10 PM EDT</p>
 
-    <h2>Ad Comments</h2>
+    <h1>{{ $ad->name }}</h1>
+
+    <p>{{ $ad->address }}</p>
+
+    <hr>
+
+    <h2>Items</h2>
+
+    <ul>
+        @forelse($ad->items as $item)
+            <li><a href="{{$item->path()}}">{{ $item->name }}</a></li>
+        @empty
+            <p>No Items listed</p>
+        @endforelse
+    </ul>
+
+    <p>
+        {{ $ad->description }}
+    </p>
+
+    <button class="btn btn-success">Add to planner</button>
+
+
     <form method="POST" action="{{$ad->path()}}/comments">
         @csrf
         <div class="form-group">

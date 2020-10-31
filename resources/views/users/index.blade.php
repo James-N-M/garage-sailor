@@ -3,7 +3,7 @@
 @section('content')
     <div class="jumbotron">
         <div class="container">
-            <h1 class="display-4">Categories</h1>
+            <h1 class="display-4">Sailors</h1>
             <hr class="my-4">
         </div>
     </div>
