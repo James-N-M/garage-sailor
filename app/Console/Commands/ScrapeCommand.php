@@ -3,14 +3,14 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Scrapers\WebScraper;
+use App\Ad;
+use App\Scrapers\VarageSale;
 
 class ScrapeCommand extends Command
 {
-
     protected $signature = 'scrape';
 
-    protected $description = 'Command description';
+    protected $description = 'Scrapes all sites that are added to the handle method';
 
     public function __construct()
     {
@@ -19,8 +19,17 @@ class ScrapeCommand extends Command
 
     public function handle()
     {
-        $scraper = new WebScraper();
+        $scraper = new VarageSale();
 
-        $scraper->scrape();
+        $ads = $scraper->scrape();
+
+        $this->create($ads);
+    }
+
+    private function create($ads = [])
+    {
+        foreach ($ads as $ad) {
+            Ad::create($ad);
+        }
     }
 }

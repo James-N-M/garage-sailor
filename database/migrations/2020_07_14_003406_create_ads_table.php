@@ -16,11 +16,11 @@ class CreateAdsTable extends Migration
         Schema::create('ads', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
-            $table->foreignId('creator_id')->constrained('users');
-            $table->dateTime('start_date_time');
-            $table->dateTime('end_date_time');
-            $table->string('address');
+            $table->text('description');
+            $table->foreignId('creator_id')->nullable();
+            $table->dateTime('start_date_time')->nullable()->default(now());
+            $table->dateTime('end_date_time')->nullable()->default(now());
+            $table->string('address')->nullable()->default("Windsor Ontario");
             $table->string('origin')->default('app');
             $table->timestamps();
         });

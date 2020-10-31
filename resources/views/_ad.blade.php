@@ -29,7 +29,9 @@
         </div>
     </div>
     <div class="card-footer text-muted">
-        Created By: <a href="#">{{ $ad->creator->name }}</a>
+        @if($ad->creator)
+            Created By: <a href="#">{{ $ad->creator->name }}</a>
+        @endif
     </div>
 </div>
 

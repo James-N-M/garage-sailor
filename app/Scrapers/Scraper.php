@@ -5,5 +5,5 @@ namespace App\Scrapers;
 
 interface Scraper
 {
-    public function scrape(): void;
+    public function scrape(): array;
 }
