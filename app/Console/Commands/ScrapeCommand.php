@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Ad;
 use App\Scrapers\VarageSale;
+use App\Scrapers\Kijiji;
 
 class ScrapeCommand extends Command
 {
@@ -19,16 +20,23 @@ class ScrapeCommand extends Command
 
     public function handle()
     {
-        $scraper = new VarageSale();
+//        $scraper = new VarageSale();
+//
+//        $ads = $scraper->scrape();
+//
+//        $this->create($ads);
+
+        $scraper = new Kijiji();
 
         $ads = $scraper->scrape();
-
+//
         $this->create($ads);
     }
 
     private function create($ads = [])
     {
         foreach ($ads as $ad) {
+            // TODO Add Validation to check for duplicates
             Ad::create($ad);
         }
     }
