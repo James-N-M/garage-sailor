@@ -23,4 +23,13 @@ class Planner extends Model
     {
         return $this->belongsToMany(Ad::class);
     }
+
+    public function maps()
+    {
+        $response = \GoogleMaps::load('geocoding')
+            ->setParam (['address' =>'santa cruz'])
+            ->get();
+
+        return $response;
+    }
 }

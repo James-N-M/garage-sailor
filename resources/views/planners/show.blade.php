@@ -15,4 +15,8 @@
         @endforelse
     </ul>
 
+    <div class="map">
+
+    </div>
+
 @endsection
