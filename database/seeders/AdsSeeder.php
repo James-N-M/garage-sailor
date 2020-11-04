@@ -18,7 +18,7 @@ class AdsSeeder extends Seeder
     {
         DB::table('ads')->insert(
             [
-                'name' => 'Clover Yard Sale',
+                'name' => 'Clover Garage Sale',
                 'description' => 'Lot of house items for sale',
                 'creator_id' => factory(User::class)->create()->id,
                 'start_date_time' => Carbon::tomorrow()->toDateTime(),
@@ -28,6 +28,21 @@ class AdsSeeder extends Seeder
                 'province' => "Ontario",
                 'latitude' => "42.335430",
                 'longitude' => "-82.915420",
+            ]
+        );
+
+        DB::table('ads')->insert(
+            [
+                'name' => 'Church Garage Sale',
+                'description' => 'Outdoor and indoor items available',
+                'creator_id' => factory(User::class)->create()->id,
+                'start_date_time' => Carbon::tomorrow()->toDateTime(),
+                'end_date_time' => Carbon::tomorrow()->toDateTime(),
+                'address' => "525 Elinor Street, Windsor, ON",
+                'city' => 'Windsor',
+                'province' => "Ontario",
+                'latitude' => "42.335320",
+                'longitude' => "-82.917520",
             ]
         );
     }

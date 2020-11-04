@@ -29,12 +29,27 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
 
 import * as VueGoogleMaps from 'vue2-google-maps';
 
+console.log(process.env.MIX_GOOGLE_MAPS_KEY);
+
 Vue.use(VueGoogleMaps, {
     load: {
-        key: ''
+        key: process.env.MIX_GOOGLE_MAPS_KEY
     }
-})
+});
 
 const app = new Vue({
     el: '#app',
+    // props: ['postTitle'],
+    // data() {
+    //     return {
+    //         infoWindowOptions: {
+    //             pixelOffset: {
+    //                 width: 0,
+    //                 height: -35
+    //             }
+    //         },
+    //         activeAd: {},
+    //         infoWindowOpened: false
+    //     }
+    // },
 });

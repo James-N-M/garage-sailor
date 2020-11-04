@@ -15,8 +15,6 @@
         @endforelse
     </ul>
 
-    <div class="map">
-
-    </div>
+    <google-map v-bind:ads="{{ json_encode($planner->ads) }}"></google-map>
 
 @endsection
