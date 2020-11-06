@@ -18,20 +18,37 @@
                     <p v-text="activeAd.city"></p>
                 </div>
             </gmap-info-window>
-            <gmap-marker
+<!--            <gmap-marker-->
+<!--                v-for="(ad, index) in ads"-->
+<!--                :key="ad.id"-->
+<!--                :position="getPosition(ad)"-->
+<!--                :clickable="true"-->
+<!--                :draggable="false"-->
+<!--                @click="handleMarkerClicked(ad)"-->
+<!--            ></gmap-marker>-->
+            <gmap-custom-marker
                 v-for="(ad, index) in ads"
                 :key="ad.id"
-                :position="getPosition(ad)"
-                :clickable="true"
-                :draggable="false"
-                @click="handleMarkerClicked(ad)"
-            ></gmap-marker>
+                :marker="getPosition(ad)"
+                @click.native="handleMarkerClicked(ad)"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50">
+                    <circle cx="25" cy="25" r="25" fill="#000000" />
+                    <text x="50%" y="50%" text-anchor="middle" fill="white" font-size="25px" dy=".3em">{{index}}</text>
+                </svg>
+            </gmap-custom-marker>
         </gmap-map>
     </div>
 </template>
 
 <script>
+
+import GmapCustomMarker from 'vue2-gmap-custom-marker';
+
 export default {
+    components: {
+        'gmap-custom-marker': GmapCustomMarker
+    },
     name: "Map",
     props: {
         ads: {

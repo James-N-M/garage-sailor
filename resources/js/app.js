@@ -39,17 +39,4 @@ Vue.use(VueGoogleMaps, {
 
 const app = new Vue({
     el: '#app',
-    // props: ['postTitle'],
-    // data() {
-    //     return {
-    //         infoWindowOptions: {
-    //             pixelOffset: {
-    //                 width: 0,
-    //                 height: -35
-    //             }
-    //         },
-    //         activeAd: {},
-    //         infoWindowOpened: false
-    //     }
-    // },
 });
