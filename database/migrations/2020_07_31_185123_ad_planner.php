@@ -16,6 +16,8 @@ class AdPlanner extends Migration
         Schema::create('ad_planner', function (Blueprint $table) {
             $table->foreignId('ad_id')->constrained('ads');
             $table->foreignId('planner_id')->constrained('planners');
+            $table->boolean('start')->nullable();
+            $table->boolean('end')->nullable();
             $table->timestamps();
         });
     }

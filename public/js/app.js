@@ -2051,6 +2051,13 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue2_gmap_custom_marker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue2-gmap-custom-marker */ "./node_modules/vue2-gmap-custom-marker/gmap-custom-marker.vue");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
 //
 //
 //
@@ -2104,7 +2111,9 @@ __webpack_require__.r(__webpack_exports__);
     ads: {
       type: Array,
       "default": []
-    }
+    },
+    start: {},
+    end: {}
   },
   data: function data() {
     return {
@@ -2132,6 +2141,29 @@ __webpack_require__.r(__webpack_exports__);
     handleInfoWindowClose: function handleInfoWindowClose() {
       this.activeRestaurant = {};
       this.infoWindowOpened = false;
+    },
+    calculateRouteSequence: function calculateRouteSequence() {
+      var waypoints = {};
+
+      for (var i = 0; i < this.ads.length; i++) {
+        waypoints["destination" + (i + 1)] = "".concat(this.ads[i].latitude, ",").concat(this.ads[i].longitude);
+      }
+
+      return axios({
+        "method": "GET",
+        "url": "https://wse.api.here.com/2/findsequence.json",
+        "params": _objectSpread(_objectSpread({
+          "start": "".concat(this.start.latitude, ",").concat(this.start.longitude)
+        }, waypoints), {}, {
+          "end": "".concat(this.end.latitude, ",").concat(this.end.longitude),
+          "mode": "fastest;car;traffic:enabled",
+          "departure": "now",
+          "app_id": "UopEqQ2s4Nm4G0DVqeRv",
+          "app_code": "ypEJhHh9KXdCy35mBlReQoGe-8AD7yeTaMmJWl8-7x4"
+        })
+      }).then(function (response) {
+        return response.data.results[0].waypoints;
+      });
     }
   },
   computed: {
@@ -2153,7 +2185,18 @@ __webpack_require__.r(__webpack_exports__);
         lat: parseFloat(this.activeAd.latitude),
         lng: parseFloat(this.activeAd.longitude)
       };
+    },
+    path: function path() {
+      return this.ads.map(function (ad) {
+        return {
+          'lat': parseFloat(ad.latitude),
+          'lng': parseFloat(ad.longitude)
+        };
+      });
     }
+  },
+  mounted: function mounted() {
+    console.log(this.calculateRouteSequence());
   }
 });
 
@@ -39244,6 +39287,15 @@ var render = function() {
           attrs: { center: _vm.mapCenter, zoom: 10 }
         },
         [
+          _c("gmap-polyline", {
+            attrs: { path: _vm.path, options: { strokeColor: "#008000" } },
+            on: {
+              "update:path": function($event) {
+                _vm.path = $event
+              }
+            }
+          }),
+          _vm._v(" "),
           _c(
             "gmap-info-window",
             {
@@ -54525,8 +54577,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/jamesmoore/Laravel/garage-sailor/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/jamesmoore/Laravel/garage-sailor/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\James\code\garage-sailor\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\James\code\garage-sailor\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

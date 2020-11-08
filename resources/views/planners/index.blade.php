@@ -11,7 +11,8 @@
     </div>
     <ul>
         @forelse ($planners as $planner)
-            <a href="{{ $planner->path() }}">{{ $planner->name }}</a>
+            <a href="{{ $planner->path() }}" class="mr-2">{{ $planner->name }}</a>
+            <a href="/planners/edit/{{$planner->id}}"><i class="far fa-edit"></i></a>
         @empty
             <p>No Planners yet.</p>
         @endforelse

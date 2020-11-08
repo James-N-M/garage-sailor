@@ -8,6 +8,17 @@ class Ad extends Model
 {
     use Commentable;
 
+    /**
+     * Create a new Eloquent Collection instance.
+     *
+     * @param  array  $models
+     * @return AdCollection
+     */
+    public function newCollection(array $models = [])
+    {
+        return new AdCollection($models);
+    }
+
     public function scopeUpcoming($query)
     {
         return $query->whereDate('start_date_time', '>=', Carbon::today()->toDateString());

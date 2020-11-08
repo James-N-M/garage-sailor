@@ -5,6 +5,7 @@
             :zoom="10"
             style="width: 100%; height: 440px;"
         >
+            <gmap-polyline v-bind:path.sync="path" v-bind:options="{ strokeColor:'#008000'}"></gmap-polyline>
             <gmap-info-window
                 :options="infoWindowOptions"
                 :position="infoWindowPosition"
@@ -54,7 +55,9 @@ export default {
         ads: {
             type: Array,
             default: []
-        }
+        },
+        start: {},
+        end: {},
     },
     data() {
         return {
@@ -83,6 +86,28 @@ export default {
             this.activeRestaurant = {};
             this.infoWindowOpened = false;
         },
+        calculateRouteSequence() {
+            let waypoints = {};
+            for(let i = 0; i < this.ads.length; i++) {
+                waypoints["destination" + (i + 1)] = `${this.ads[i].latitude},${this.ads[i].longitude}`;
+            }
+
+            return axios({
+                "method": "GET",
+                "url": "https://wse.api.here.com/2/findsequence.json",
+                "params": {
+                    "start": `${this.start.latitude},${this.start.longitude}`,
+                    ...waypoints,
+                    "end": `${this.end.latitude},${this.end.longitude}`,
+                    "mode": "fastest;car;traffic:enabled",
+                    "departure": "now",
+                    "app_id": "UopEqQ2s4Nm4G0DVqeRv",
+                    "app_code": "ypEJhHh9KXdCy35mBlReQoGe-8AD7yeTaMmJWl8-7x4"
+                }
+            }).then(response => {
+                return response.data.results[0].waypoints
+            });
+        }
     },
     computed: {
         mapCenter() {
@@ -104,6 +129,14 @@ export default {
                 lng: parseFloat(this.activeAd.longitude)
             };
         },
+        path() {
+            return this.ads.map(function (ad) {
+                return {'lat': parseFloat(ad.latitude), 'lng': parseFloat(ad.longitude)};
+            });
+        }
+    },
+    mounted() {
+        console.log(this.calculateRouteSequence());
     }
 }
 </script>
