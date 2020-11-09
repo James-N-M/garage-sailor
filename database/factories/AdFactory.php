@@ -14,6 +14,8 @@ $factory->define(Ad::class, function (Faker $faker) {
         'start_date_time' => $faker->dateTime,
         'end_date_time' => $faker->dateTime,
         'address' => $faker->address,
+        'latitude' => $faker->latitude,
+        'longitude' => $faker->longitude,
         'origin' => $faker->randomElement(['facebook', 'kijiji', 'app']),
     ];
 });

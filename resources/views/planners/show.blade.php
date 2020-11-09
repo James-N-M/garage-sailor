@@ -15,4 +15,10 @@
         @endforelse
     </ul>
 
+    <google-map v-bind:ads="{{ json_encode($planner->ads) }}"
+                v-bind:start="{{ json_encode($start) }}"
+                v-bind:end="{{ json_encode($end) }}"
+    >
+    </google-map>
+
 @endsection

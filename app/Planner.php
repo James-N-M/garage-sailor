@@ -21,6 +21,23 @@ class Planner extends Model
 
     public function ads()
     {
-        return $this->belongsToMany(Ad::class);
+        return $this->belongsToMany(Ad::class)->withPivot('start', 'end');
+    }
+
+    public function start() {
+        return $this->ads()->wherePivot('start', true)->first();
+    }
+
+    public function end() {
+        return $this->ads()->wherePivot('end', true)->first();
+    }
+
+    public function maps()
+    {
+        $response = \GoogleMaps::load('geocoding')
+            ->setParam (['address' =>'santa cruz'])
+            ->get();
+
+        return $response;
     }
 }

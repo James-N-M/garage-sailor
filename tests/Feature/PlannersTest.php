@@ -74,4 +74,40 @@ class PlannersTest extends TestCase
 
         $this->assertDatabaseHas('ad_planner', ['planner_id' => $planner->id, 'ad_id' => $ad->id]);
     }
+
+    /** @test */
+    public function a_user_can_add_a_starting_point_to_their_planner()
+    {
+        $user = $this->signIn();
+
+        // Given you have a planner with three ads
+        $planner = factory(Planner::class)->create(['creator_id' => $user->id]);
+        $planner->addAd($ad = factory(Ad::class)->create());
+        $planner->addAd(factory(Ad::class)->create());
+        $planner->addAd(factory(Ad::class)->create());
+
+        $this->get("/planners/edit/$planner->id")->assertOk();
+
+        $this->patch("/ad-planner/$planner->id", ['start' => $ad->id]);
+
+        $this->assertDatabaseHas('ad_planner', ['ad_id' => $ad->id, 'planner_id' => $planner->id, 'start' => true]);
+    }
+
+    /** @test */
+    public function a_user_can_add_a_end_point_to_their_planner()
+    {
+        $user = $this->signIn();
+
+        // Given you have a planner with three ads
+        $planner = factory(Planner::class)->create(['creator_id' => $user->id]);
+        $planner->addAd($ad = factory(Ad::class)->create());
+        $planner->addAd(factory(Ad::class)->create());
+        $planner->addAd(factory(Ad::class)->create());
+
+        $this->get("/planners/edit/$planner->id")->assertOk();
+
+        $this->patch("/ad-planner/$planner->id", ['end' => $ad->id]);
+
+        $this->assertDatabaseHas('ad_planner', ['ad_id' => $ad->id, 'planner_id' => $planner->id, 'end' => true]);
+    }
 }

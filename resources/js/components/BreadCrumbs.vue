@@ -19,7 +19,6 @@
 
 <script>
 export default {
-
     name: "BreadCrumbs",
     props: ['crumbs'],
     data() {

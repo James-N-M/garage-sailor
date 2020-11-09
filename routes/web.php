@@ -53,10 +53,12 @@ Route::group(['middleware' => 'auth'],function () {
 
     Route::get('/planners', [PlannersController::class, 'index']);
     Route::get('/planners/create', [PlannersController::class, 'create']);
+    Route::get('/planners/edit/{planner}', [PlannersController::class, 'edit']);
     Route::get('/planners/{planner}', [PlannersController::class, 'show']);
     Route::post('/planners', [PlannersController::class, 'store']);
 
     Route::post('/planners/{planner}/ads/{ad}', [AdPlannerController::class, 'store']);
+    Route::patch('/ad-planner/{planner}', [AdPlannerController::class, 'update']);
 });
 
 Route::get('/ads', [AdsController::class, 'index'])->name('home');

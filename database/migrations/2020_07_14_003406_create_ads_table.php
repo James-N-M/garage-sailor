@@ -20,7 +20,11 @@ class CreateAdsTable extends Migration
             $table->foreignId('creator_id')->nullable();
             $table->dateTime('start_date_time')->nullable()->default(now());
             $table->dateTime('end_date_time')->nullable()->default(now());
-            $table->string('address')->nullable()->default("Windsor Ontario");
+            $table->string('address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('province')->nullable();
+            $table->decimal('latitude', 8, 6)->nullable();
+            $table->decimal('longitude', 9, 6)->nullable();
             $table->string('origin')->default('app');
             $table->timestamps();
         });
