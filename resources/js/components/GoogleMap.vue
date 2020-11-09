@@ -28,8 +28,8 @@
 <!--                @click="handleMarkerClicked(ad)"-->
 <!--            ></gmap-marker>-->
             <gmap-custom-marker
-                v-for="(ad, index) in ads"
-                :key="ad.id"
+                v-for="(ad, index) in sortedAds"
+                :key="index"
                 :marker="getPosition(ad)"
                 @click.native="handleMarkerClicked(ad)"
             >
@@ -69,6 +69,44 @@ export default {
             },
             activeAd: {},
             infoWindowOpened: false,
+            waypoints: [
+                {
+                    "id": "Clover-Garage-Sale",
+                    "lat": 42.33543,
+                    "lng": -82.91542,
+                    "sequence": 0,
+                    "estimatedArrival": null,
+                    "estimatedDeparture": null,
+                    "fulfilledConstraints": []
+                },
+                {
+                    "id": "HS-Yard-Sale",
+                    "lat": 42.316689,
+                    "lng": -82.91291,
+                    "sequence": 1,
+                    "estimatedArrival": null,
+                    "estimatedDeparture": null,
+                    "fulfilledConstraints": []
+                },
+                {
+                    "id": "Church-Garage-Sale",
+                    "lat": 42.33532,
+                    "lng": -82.91752,
+                    "sequence": 2,
+                    "estimatedArrival": null,
+                    "estimatedDeparture": null,
+                    "fulfilledConstraints": []
+                },
+                {
+                    "id": "HERE-Clover-Garage-Sale",
+                    "lat": 42.33543,
+                    "lng": -82.91542,
+                    "sequence": 3,
+                    "estimatedArrival": null,
+                    "estimatedDeparture": null,
+                    "fulfilledConstraints": []
+                }
+            ],
         }
     },
     methods: {
@@ -102,7 +140,7 @@ export default {
                     "mode": "fastest;car;traffic:enabled",
                     "departure": "now",
                     "app_id": "UopEqQ2s4Nm4G0DVqeRv",
-                    "app_code": "ypEJhHh9KXdCy35mBlReQoGe-8AD7yeTaMmJWl8-7x4"
+                    "app_code": process.env.MIX_HERE_KEY
                 }
             }).then(response => {
                 return response.data.results[0].waypoints
@@ -130,13 +168,24 @@ export default {
             };
         },
         path() {
-            return this.ads.map(function (ad) {
+            return this.sortedAds.map(function (ad) {
                 return {'lat': parseFloat(ad.latitude), 'lng': parseFloat(ad.longitude)};
             });
+        },
+        sortedAds() {
+            let sorted = [];
+            this.waypoints.forEach((waypoint) => {
+                for(let i = 0; i < this.ads.length; i++) {
+                    if (waypoint.lat == this.ads[i].latitude && waypoint.lng == this.ads[i].longitude) {
+                        sorted.push(this.ads[i]);
+                    }
+                }
+            });
+            return sorted;
         }
     },
     mounted() {
-        console.log(this.calculateRouteSequence());
+        this.calculateRouteSequence();
     }
 }
 </script>

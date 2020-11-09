@@ -2124,7 +2124,40 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       },
       activeAd: {},
-      infoWindowOpened: false
+      infoWindowOpened: false,
+      waypoints: [{
+        "id": "Clover-Garage-Sale",
+        "lat": 42.33543,
+        "lng": -82.91542,
+        "sequence": 0,
+        "estimatedArrival": null,
+        "estimatedDeparture": null,
+        "fulfilledConstraints": []
+      }, {
+        "id": "HS-Yard-Sale",
+        "lat": 42.316689,
+        "lng": -82.91291,
+        "sequence": 1,
+        "estimatedArrival": null,
+        "estimatedDeparture": null,
+        "fulfilledConstraints": []
+      }, {
+        "id": "Church-Garage-Sale",
+        "lat": 42.33532,
+        "lng": -82.91752,
+        "sequence": 2,
+        "estimatedArrival": null,
+        "estimatedDeparture": null,
+        "fulfilledConstraints": []
+      }, {
+        "id": "HERE-Clover-Garage-Sale",
+        "lat": 42.33543,
+        "lng": -82.91542,
+        "sequence": 3,
+        "estimatedArrival": null,
+        "estimatedDeparture": null,
+        "fulfilledConstraints": []
+      }]
     };
   },
   methods: {
@@ -2187,16 +2220,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       };
     },
     path: function path() {
-      return this.ads.map(function (ad) {
+      return this.sortedAds.map(function (ad) {
         return {
           'lat': parseFloat(ad.latitude),
           'lng': parseFloat(ad.longitude)
         };
       });
+    },
+    sortedAds: function sortedAds() {
+      var _this = this;
+
+      var sorted = [];
+      this.waypoints.forEach(function (waypoint) {
+        for (var i = 0; i < _this.ads.length; i++) {
+          if (waypoint.lat == _this.ads[i].latitude && waypoint.lng == _this.ads[i].longitude) {
+            sorted.push(_this.ads[i]);
+          }
+        }
+      });
+      return sorted;
     }
   },
   mounted: function mounted() {
-    console.log(this.calculateRouteSequence());
+    this.calculateRouteSequence();
   }
 });
 
@@ -39325,11 +39371,11 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _vm._l(_vm.ads, function(ad, index) {
+          _vm._l(_vm.sortedAds, function(ad, index) {
             return _c(
               "gmap-custom-marker",
               {
-                key: ad.id,
+                key: index,
                 attrs: { marker: _vm.getPosition(ad) },
                 nativeOn: {
                   click: function($event) {
@@ -54226,7 +54272,6 @@ files.keys().map(function (key) {
  */
 
 
-console.log("AIzaSyBD2pJtJP80D1zZ0YOLyMrmn2COzSf5Bis");
 Vue.use(vue2_google_maps__WEBPACK_IMPORTED_MODULE_0__, {
   load: {
     key: "AIzaSyBD2pJtJP80D1zZ0YOLyMrmn2COzSf5Bis"
