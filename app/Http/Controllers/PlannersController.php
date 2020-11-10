@@ -24,7 +24,7 @@ class PlannersController extends Controller
     {
         $start = $planner->start();
         $end = $planner->end();
-        $ads = $planner->ads;
+        $ads = $planner->ads()->wherePivot('start', false);
 
         return view('planners.show', compact('planner', 'start', 'end', 'ads'));
     }

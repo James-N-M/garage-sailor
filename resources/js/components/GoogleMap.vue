@@ -19,15 +19,15 @@
                     <p v-text="activeAd.city"></p>
                 </div>
             </gmap-info-window>
-<!--            <gmap-marker-->
-<!--                v-for="(ad, index) in ads"-->
-<!--                :key="ad.id"-->
-<!--                :position="getPosition(ad)"-->
-<!--                :clickable="true"-->
-<!--                :draggable="false"-->
-<!--                @click="handleMarkerClicked(ad)"-->
-<!--            ></gmap-marker>-->
-            <gmap-custom-marker
+            <gmap-marker v-if="ads.length <= 2"
+                v-for="(ad, index) in ads"
+                :key="ad.id"
+                :position="getPosition(ad)"
+                :clickable="true"
+                :draggable="false"
+                @click="handleMarkerClicked(ad)"
+            ></gmap-marker>
+            <gmap-custom-marker v-else
                 v-for="(ad, index) in sortedAds"
                 :key="index"
                 :marker="getPosition(ad)"

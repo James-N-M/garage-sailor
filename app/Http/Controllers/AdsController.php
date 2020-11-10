@@ -9,7 +9,7 @@ class AdsController extends Controller
 {
     public function index()
     {
-        $ads = Ad::paginate(6);
+        $ads = Ad::orderByDesc('created_at')->paginate(6);
 
         return view('ads.index')->with('ads', $ads);
     }

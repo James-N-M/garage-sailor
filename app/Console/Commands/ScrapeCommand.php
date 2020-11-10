@@ -29,7 +29,7 @@ class ScrapeCommand extends Command
         $scraper = new Kijiji();
 
         $ads = $scraper->scrape();
-//
+
         $this->create($ads);
     }
 

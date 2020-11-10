@@ -26,5 +26,7 @@ class PlannerWithAdSeeder extends Seeder
         $planner->addAd($ad);
 
         $planner->addAd($adTwo);
+
+
     }
 }
