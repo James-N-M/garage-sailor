@@ -10,14 +10,10 @@
             <input type="text" class="form-control" name="name">
         </div>
 
-        <div class="form-group">
-            <label for="exampleInputPassword1">date</label>
-            <input type="date" class="form-control" id="exampleInputPassword1" name="date">
-        </div>
+        <planner-ads></planner-ads>
+
 
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
-    <!-- Able to create a planner with ads -->
-    <!-- drop down on change ajax request to load ads for that day make them selectable-->
 @endsection
