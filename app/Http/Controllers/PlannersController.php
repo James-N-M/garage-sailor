@@ -49,8 +49,10 @@ class PlannersController extends Controller
 
         $planner = auth()->user()->planners()->create($attributes);
 
-        foreach($request->ads as $ad) {
-            $planner->addAd(Ad::find($ad));
+        if ($request->ads) {
+            foreach($request->ads as $ad) {
+                $planner->addAd(Ad::find($ad));
+            }
         }
 
         return redirect($planner->path());

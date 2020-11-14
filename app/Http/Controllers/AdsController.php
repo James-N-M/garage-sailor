@@ -51,6 +51,11 @@ class AdsController extends Controller
             'address' => ['required'],
         ]);
 
+        if ($request->file('image')) {
+            $filePath = $request->file('image')->store('/public/ads');
+            $attributes['image_path'] = $filePath;
+        }
+
         $ad = auth()->user()->ads()->create($attributes);
 
         /* TODO add validation */

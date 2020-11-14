@@ -6,7 +6,7 @@
     >
     </bread-crumbs>
 
-    <form method="POST" action="/ads">
+    <form method="POST" action="/ads" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="exampleInputEmail1">Ad Name</label>
@@ -27,6 +27,11 @@
         <div class="form-group">
             <label for="exampleInputPassword1">address</label>
             <input type="text" class="form-control" id="exampleInputPassword1" name="address">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputPassword1">Image</label>
+            <input type="file" class="form-control" id="exampleInputPassword1" name="image">
         </div>
 
         <create-items></create-items>

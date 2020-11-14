@@ -26,6 +26,7 @@ class CreateAdsTable extends Migration
             $table->decimal('latitude', 8, 6)->nullable();
             $table->decimal('longitude', 9, 6)->nullable();
             $table->string('origin')->default('app');
+            $table->string('image_path')->nullable();
             $table->timestamps();
         });
     }

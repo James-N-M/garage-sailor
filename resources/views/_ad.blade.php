@@ -5,7 +5,7 @@
     </div>
     <div class="card-body d-flex">
         <div class="mr-5">
-            <img src="https://picsum.photos/150" alt="placeholder image">
+            <img style="height: 150px; width: 150px;"src="{{url($ad->imagePath())}}" alt="placeholder image">
         </div>
         <div>
             <a href="{{ $ad->path() }}"><h4>{{ $ad->name }}</h4></a>

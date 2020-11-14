@@ -18,6 +18,15 @@ class Ad extends Model
         return "/ads/{$this->id}";
     }
 
+    public function imagePath()
+    {
+        if ($this->image_path) {
+            return "/images/$this->image_path";
+        } else {
+            return "/images/public/ads/default-image.jpeg";
+        }
+    }
+
     public function addItem($item)
     {
         return $this->items()->create($item);

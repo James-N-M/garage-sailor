@@ -56,7 +56,7 @@ class PlannersTest extends TestCase
 
         $this->get('/planners/create')->assertOk();
 
-        $this->post('/planners', $planner->toArray())->assertSuccessful();
+        $this->post('/planners', $planner->toArray());
 
         $this->assertDatabaseHas('planners', ['name' => $planner->name]);
     }
@@ -80,7 +80,6 @@ class PlannersTest extends TestCase
     {
         $user = $this->signIn();
 
-        // Given you have a planner with three ads
         $planner = factory(Planner::class)->create(['creator_id' => $user->id]);
         $planner->addAd($ad = factory(Ad::class)->create());
         $planner->addAd(factory(Ad::class)->create());
@@ -98,7 +97,6 @@ class PlannersTest extends TestCase
     {
         $user = $this->signIn();
 
-        // Given you have a planner with three ads
         $planner = factory(Planner::class)->create(['creator_id' => $user->id]);
         $planner->addAd($ad = factory(Ad::class)->create());
         $planner->addAd(factory(Ad::class)->create());
