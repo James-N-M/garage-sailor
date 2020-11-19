@@ -1,5 +1,22 @@
 <template>
     <div class="map">
+        <div>
+            <div class="form-group">
+                <label>Start</label>
+                <select v-model="start" class="form-control" name="start" @change="calculateRouteSequence">
+                    <option value=""></option>
+                    <option v-for="ad in ads" :value="ad">{{ ad.name }}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>End</label>
+                <select v-model="end" class="form-control" name="start" @change="calculateRouteSequence">
+                    <option value=""></option>
+                    <option v-for="ad in ads" :value="ad">{{ ad.name }}</option>
+                </select>
+            </div>
+        </div>
         <gmap-map
             :center="mapCenter"
             :zoom="10"
@@ -19,16 +36,8 @@
                     <p v-text="activeAd.city"></p>
                 </div>
             </gmap-info-window>
-            <gmap-marker v-if="ads.length <= 2"
+            <gmap-custom-marker
                 v-for="(ad, index) in ads"
-                :key="ad.id"
-                :position="getPosition(ad)"
-                :clickable="true"
-                :draggable="false"
-                @click="handleMarkerClicked(ad)"
-            ></gmap-marker>
-            <gmap-custom-marker v-else
-                v-for="(ad, index) in sortedAds"
                 :key="index"
                 :marker="getPosition(ad)"
                 @click.native="handleMarkerClicked(ad)"
@@ -56,8 +65,8 @@ export default {
             type: Array,
             default: []
         },
-        start: {},
-        end: {},
+        // start: {},
+        // end: {},
     },
     data() {
         return {
@@ -69,44 +78,9 @@ export default {
             },
             activeAd: {},
             infoWindowOpened: false,
-            waypoints: [
-                {
-                    "id": "Clover-Garage-Sale",
-                    "lat": 42.33543,
-                    "lng": -82.91542,
-                    "sequence": 0,
-                    "estimatedArrival": null,
-                    "estimatedDeparture": null,
-                    "fulfilledConstraints": []
-                },
-                {
-                    "id": "HS-Yard-Sale",
-                    "lat": 42.316689,
-                    "lng": -82.91291,
-                    "sequence": 1,
-                    "estimatedArrival": null,
-                    "estimatedDeparture": null,
-                    "fulfilledConstraints": []
-                },
-                {
-                    "id": "Church-Garage-Sale",
-                    "lat": 42.33532,
-                    "lng": -82.91752,
-                    "sequence": 2,
-                    "estimatedArrival": null,
-                    "estimatedDeparture": null,
-                    "fulfilledConstraints": []
-                },
-                {
-                    "id": "HERE-Clover-Garage-Sale",
-                    "lat": 42.33543,
-                    "lng": -82.91542,
-                    "sequence": 3,
-                    "estimatedArrival": null,
-                    "estimatedDeparture": null,
-                    "fulfilledConstraints": []
-                }
-            ],
+            waypoints: [],
+            start: {},
+            end: {},
         }
     },
     methods: {
@@ -130,21 +104,23 @@ export default {
                 waypoints["destination" + (i + 1)] = `${this.ads[i].latitude},${this.ads[i].longitude}`;
             }
 
-            return axios({
-                "method": "GET",
-                "url": "https://wse.api.here.com/2/findsequence.json",
-                "params": {
-                    "start": `${this.start.latitude},${this.start.longitude}`,
-                    ...waypoints,
-                    "end": `${this.end.latitude},${this.end.longitude}`,
-                    "mode": "fastest;car;traffic:enabled",
-                    "departure": "now",
-                    "app_id": "UopEqQ2s4Nm4G0DVqeRv",
-                    "app_code": process.env.MIX_HERE_KEY
-                }
-            }).then(response => {
-                return response.data.results[0].waypoints
-            });
+            if (!_.isEmpty(this.start) && !_.isEmpty(this.end)) {
+                return axios({
+                    "method": "GET",
+                    "url": "https://wse.api.here.com/2/findsequence.json",
+                    "params": {
+                        "start": `${this.start.latitude},${this.start.longitude}`,
+                        ...waypoints,
+                        "end": `${this.end.latitude},${this.end.longitude}`,
+                        "mode": "fastest;car;traffic:enabled",
+                        "departure": "now",
+                        "app_id": "UopEqQ2s4Nm4G0DVqeRv",
+                        "app_code": process.env.MIX_HERE_KEY
+                    }
+                }).then(response => {
+                    return response.data.results[0].waypoints
+                });
+            }
         }
     },
     computed: {
@@ -168,7 +144,8 @@ export default {
             };
         },
         path() {
-            return this.sortedAds.map(function (ad) {
+            // update to use here path
+            return this.ads.map(function (ad) {
                 return {'lat': parseFloat(ad.latitude), 'lng': parseFloat(ad.longitude)};
             });
         },
