@@ -20,12 +20,6 @@ class ScrapeCommand extends Command
 
     public function handle()
     {
-//        $scraper = new VarageSale();
-//
-//        $ads = $scraper->scrape();
-//
-//        $this->create($ads);
-
         $scraper = new Kijiji();
 
         $ads = $scraper->scrape();
@@ -36,7 +30,6 @@ class ScrapeCommand extends Command
     private function create($ads = [])
     {
         foreach ($ads as $ad) {
-            // TODO Add Validation to check for duplicates
             Ad::create($ad);
         }
     }

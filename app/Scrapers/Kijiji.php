@@ -71,6 +71,16 @@ class Kijiji implements Scraper
                 $ad['address'] = $crawler->filter('[itemprop="address"]')->text();
             }
 
+            // Longitude and Latitude
+            if ($ad['address']) {
+                $response = json_decode(\GoogleMaps::load('geocoding')
+                    ->setParam(['address' => $ad['address']])
+                    ->get());
+
+                $ad['latitude'] = $response->results[0]->geometry->location->lat;
+                $ad['longitude'] = $response->results[0]->geometry->location->lng;
+            }
+
             $ad['origin'] = "Kijiji";
 
             $ads[] = $ad;
