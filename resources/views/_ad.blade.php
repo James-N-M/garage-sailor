@@ -10,22 +10,22 @@
         <div>
             <a href="{{ $ad->path() }}"><h4>{{ $ad->name }}</h4></a>
 
-            <div>
-                <i class="fas fa-map-pin mr-2"></i>
-                <span>{{ $ad->address }}</span>
+            <div class="align-items-center d-flex">
+                <div style="width: 25px; color: darkred;"><i class="fas fa-map-pin"></i></div>
+                <div><span>{{ $ad->address }}</span></div>
             </div>
 
-            <div>
-                <i class="far fa-calendar-times mr-2"></i>
-                <span>{{ $ad->start_date_time }}</span>
+            <div class="align-items-center d-flex">
+                <div style="width: 25px; color: darkcyan"><i class="far fa-calendar-times"></i></div>
+                <div><span>{{ $ad->start_date_time }}</span></div>
             </div>
 
-            <div>
-                <i class="far fa-clock mr-2"></i>
-                <span>{{ $ad->start_date_time }}</span>
+            <div class="align-items-center d-flex">
+                <div style="width: 25px;"><i class="far fa-clock"></i></div>
+                <div><span>{{ $ad->end_date_time }}</span></div>
             </div>
 
-            <p>{{ $ad->description }}</p>
+            <p class="pt-2">{{ $ad->description }}</p>
         </div>
     </div>
     <div class="card-footer text-muted">

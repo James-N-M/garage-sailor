@@ -2,10 +2,9 @@
     <div class="map">
         <gmap-map
             :center="mapCenter"
-            :zoom="10"
-            style="width: 100%; height: 440px;"
+            :zoom="15"
+            style="width: 100%; height: 600px;"
         >
-            <gmap-polyline v-bind:path.sync="path" v-bind:options="{ strokeColor:'#008000'}"></gmap-polyline>
             <gmap-info-window
                 :options="infoWindowOptions"
                 :position="infoWindowPosition"
@@ -19,45 +18,23 @@
                     <p v-text="activeAd.city"></p>
                 </div>
             </gmap-info-window>
-            <gmap-marker v-if="ads.length <= 2"
-                v-for="(ad, index) in ads"
-                :key="ad.id"
-                :position="getPosition(ad)"
-                :clickable="true"
-                :draggable="false"
-                @click="handleMarkerClicked(ad)"
+            <gmap-marker
+                         :position="getPosition(this.ad)"
+                         :clickable="true"
+                         :draggable="false"
+                         @click="handleMarkerClicked(ad)"
             ></gmap-marker>
-            <gmap-custom-marker v-else
-                v-for="(ad, index) in sortedAds"
-                :key="index"
-                :marker="getPosition(ad)"
-                @click.native="handleMarkerClicked(ad)"
-            >
-                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50">
-                    <circle cx="25" cy="25" r="25" fill="#000000" />
-                    <text x="50%" y="50%" text-anchor="middle" fill="white" font-size="25px" dy=".3em">{{index}}</text>
-                </svg>
-            </gmap-custom-marker>
         </gmap-map>
     </div>
 </template>
 
 <script>
-
-import GmapCustomMarker from 'vue2-gmap-custom-marker';
-
 export default {
-    components: {
-        'gmap-custom-marker': GmapCustomMarker
-    },
-    name: "Map",
+    name: "Google-Map",
     props: {
-        ads: {
-            type: Array,
-            default: []
+        ad: {
+            type: Object,
         },
-        start: {},
-        end: {},
     },
     data() {
         return {
@@ -69,44 +46,6 @@ export default {
             },
             activeAd: {},
             infoWindowOpened: false,
-            waypoints: [
-                {
-                    "id": "Clover-Garage-Sale",
-                    "lat": 42.33543,
-                    "lng": -82.91542,
-                    "sequence": 0,
-                    "estimatedArrival": null,
-                    "estimatedDeparture": null,
-                    "fulfilledConstraints": []
-                },
-                {
-                    "id": "HS-Yard-Sale",
-                    "lat": 42.316689,
-                    "lng": -82.91291,
-                    "sequence": 1,
-                    "estimatedArrival": null,
-                    "estimatedDeparture": null,
-                    "fulfilledConstraints": []
-                },
-                {
-                    "id": "Church-Garage-Sale",
-                    "lat": 42.33532,
-                    "lng": -82.91752,
-                    "sequence": 2,
-                    "estimatedArrival": null,
-                    "estimatedDeparture": null,
-                    "fulfilledConstraints": []
-                },
-                {
-                    "id": "HERE-Clover-Garage-Sale",
-                    "lat": 42.33543,
-                    "lng": -82.91542,
-                    "sequence": 3,
-                    "estimatedArrival": null,
-                    "estimatedDeparture": null,
-                    "fulfilledConstraints": []
-                }
-            ],
         }
     },
     methods: {
@@ -124,41 +63,12 @@ export default {
             this.activeRestaurant = {};
             this.infoWindowOpened = false;
         },
-        calculateRouteSequence() {
-            let waypoints = {};
-            for(let i = 0; i < this.ads.length; i++) {
-                waypoints["destination" + (i + 1)] = `${this.ads[i].latitude},${this.ads[i].longitude}`;
-            }
-
-            return axios({
-                "method": "GET",
-                "url": "https://wse.api.here.com/2/findsequence.json",
-                "params": {
-                    "start": `${this.start.latitude},${this.start.longitude}`,
-                    ...waypoints,
-                    "end": `${this.end.latitude},${this.end.longitude}`,
-                    "mode": "fastest;car;traffic:enabled",
-                    "departure": "now",
-                    "app_id": "UopEqQ2s4Nm4G0DVqeRv",
-                    "app_code": process.env.MIX_HERE_KEY
-                }
-            }).then(response => {
-                return response.data.results[0].waypoints
-            });
-        }
     },
     computed: {
         mapCenter() {
-            if (!this.ads.length) {
-                return {
-                    lat: 10,
-                    lng: 10
-                }
-            }
-
             return {
-                lat: parseFloat(this.ads[0].latitude),
-                lng: parseFloat(this.ads[0].longitude)
+                lat: parseFloat(this.ad.latitude),
+                lng: parseFloat(this.ad.longitude)
             }
         },
         infoWindowPosition() {
@@ -166,27 +76,8 @@ export default {
                 lat: parseFloat(this.activeAd.latitude),
                 lng: parseFloat(this.activeAd.longitude)
             };
-        },
-        path() {
-            return this.sortedAds.map(function (ad) {
-                return {'lat': parseFloat(ad.latitude), 'lng': parseFloat(ad.longitude)};
-            });
-        },
-        sortedAds() {
-            let sorted = [];
-            this.waypoints.forEach((waypoint) => {
-                for(let i = 0; i < this.ads.length; i++) {
-                    if (waypoint.lat == this.ads[i].latitude && waypoint.lng == this.ads[i].longitude) {
-                        sorted.push(this.ads[i]);
-                    }
-                }
-            });
-            return sorted;
         }
     },
-    mounted() {
-        this.calculateRouteSequence();
-    }
 }
 </script>
 

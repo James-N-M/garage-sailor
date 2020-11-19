@@ -1,7 +1,10 @@
 @extends('layouts.app')
 @section('content')
 
-    <div class="jumbotron">
+    <div class="jumbotron"
+    style="background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,212,255,1) 0%, rgba(36,36,246,1) 96%);"
+    >
         <div class="container">
             <h1 class="display-4">Ads</h1>
             <h3>COVID-19 Buyers and Sellers</h3>

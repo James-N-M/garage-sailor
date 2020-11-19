@@ -11,6 +11,6 @@ class AdCommentsController extends Controller
     {
         $ad->addComment(request('body'), request('reply_to_id'));
 
-        return "Comment added";
+        return back();
     }
 }

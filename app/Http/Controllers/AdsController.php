@@ -51,9 +51,17 @@ class AdsController extends Controller
             'address' => ['required'],
         ]);
 
+
         if ($request->file('image')) {
             $filePath = $request->file('image')->store('/public/ads');
             $attributes['image_path'] = $filePath;
+        }
+
+        $location = $this->getGeoCode($request->address);
+
+        if ($location) {
+            $attributes['latitude'] = $location->lat;
+            $attributes['longitude'] = $location->lng;
         }
 
         $ad = auth()->user()->ads()->create($attributes);
@@ -74,5 +82,14 @@ class AdsController extends Controller
         $ad->delete();
 
         return "ad deleted";
+    }
+
+    private function getGeoCode($address)
+    {
+        $response = json_decode(\GoogleMaps::load('geocoding')
+            ->setParam(['address' => $address])
+            ->get());
+
+        return $response->results[0]->geometry->location;
     }
 }

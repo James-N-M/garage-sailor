@@ -41,4 +41,14 @@ class Ad extends Model
     {
         return $this->hasMany(Item::class);
     }
+
+    public function getStartDateTimeAttribute($value)
+    {
+        return Carbon::parse($value)->toDayDateTimeString();
+    }
+
+    public function getEndDateTimeAttribute($value)
+    {
+        return Carbon::parse($value)->toDayDateTimeString();
+    }
 }
