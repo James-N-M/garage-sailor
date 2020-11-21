@@ -47,7 +47,6 @@ class User extends Authenticatable
         return $this->hasMany(Planner::class, 'creator_id');
     }
 
-    // Has Many through relationship testttt TODO FIX
     public function items()
     {
         return $this->hasManyThrough(Item::class, Ad::class, 'creator_id', 'ad_id', 'id', 'id');

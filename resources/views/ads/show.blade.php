@@ -71,6 +71,10 @@
                 v-bind:ad="{{ json_encode($ad) }}"
             >
             </google-map>
+
+            <div>
+                Messenger App goes here
+            </div>
         </div>
     </div>
 
