@@ -68,7 +68,9 @@ Route::get('/ads/{ad}', [AdsController::class, 'show']);
 Route::get('/items/{item}', [ItemsController::class, 'show']);
 Route::get('/categories/{category}', [CategoriesController::class, 'show']);
 
-
 Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('home');
+// Messenger section
+Route::get('/chat', 'ChatsController@index');
+Route::get('messages', 'ChatsController@fetchMessages');
+Route::post('messages', 'ChatsController@sendMessage');
