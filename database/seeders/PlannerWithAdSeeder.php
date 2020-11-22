@@ -23,10 +23,12 @@ class PlannerWithAdSeeder extends Seeder
 
         $adTwo = Ad::find(2);
 
+        $adThree = Ad::find(3);
+
         $planner->addAd($ad);
 
         $planner->addAd($adTwo);
 
-
+        $planner->addAd($adThree);
     }
 }

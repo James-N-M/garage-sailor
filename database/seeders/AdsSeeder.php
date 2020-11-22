@@ -45,5 +45,20 @@ class AdsSeeder extends Seeder
                 'longitude' => "-82.917520",
             ]
         );
+
+        DB::table('ads')->insert(
+            [
+                'name' => 'St. Joes High School Garage Sale',
+                'description' => 'Outdoor and indoor items available',
+                'creator_id' => factory(User::class)->create()->id,
+                'start_date_time' => Carbon::tomorrow()->toDateTime(),
+                'end_date_time' => Carbon::tomorrow()->toDateTime(),
+                'address' => "2425 Clover Ave, Windsor, ON N8P 2A3",
+                'city' => 'Windsor',
+                'province' => "Ontario",
+                'latitude' => "42.316903",
+                'longitude' => "-82.911269",
+            ]
+        );
     }
 }

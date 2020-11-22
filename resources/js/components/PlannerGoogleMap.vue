@@ -65,8 +65,6 @@ export default {
             type: Array,
             default: []
         },
-        // start: {},
-        // end: {},
     },
     data() {
         return {
@@ -118,7 +116,7 @@ export default {
                         "app_code": process.env.MIX_HERE_KEY
                     }
                 }).then(response => {
-                    return response.data.results[0].waypoints
+                    this.waypoints = response.data.results[0].waypoints
                 });
             }
         }
