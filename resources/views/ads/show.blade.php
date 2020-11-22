@@ -72,8 +72,8 @@
             >
             </google-map>
 
-            <div>
-                Messenger App goes here
+            <div class="d-flex justify-content-center p-5">
+                <a href="/chats/{{ $ad->creator->id }}"><button class="btn btn-info">Chat with {{ucfirst($ad->creator->name)}} !</button></a>
             </div>
         </div>
     </div>

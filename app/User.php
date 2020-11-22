@@ -51,4 +51,9 @@ class User extends Authenticatable
     {
         return $this->hasManyThrough(Item::class, Ad::class, 'creator_id', 'ad_id', 'id', 'id');
     }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
 }
