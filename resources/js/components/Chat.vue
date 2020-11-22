@@ -1,9 +1,10 @@
 <template>
     <div class="panel panel-default">
-        <div class="panel-heading">Chats</div>
+        <div class="panel-heading"><b>{{ (to.name).toUpperCase() }} Chats</b></div>
 
         <div class="panel-body">
             <chat-messages :messages="messages"></chat-messages>
+            <chat-messages :messages="newMessages"></chat-messages>
         </div>
         <div class="panel-footer">
             <chat-form
@@ -20,16 +21,16 @@ import ChatForm from "./ChatForm";
 import ChatMessages from "./ChatMessages";
 export default {
     components: {ChatForm, ChatMessages},
-    props: ['user'],
+    props: ['user', 'messages', 'to'],
 
     data() {
         return {
-            messages: []
+            newMessages: []
         }
     },
 
     created() {
-        this.fetchMessages();
+        // this.fetchMessages();
 
         Echo.private('chat').listen('MessageSent', (e) => {
             this.messages.push({
@@ -47,7 +48,8 @@ export default {
         },
 
         addMessage(message) {
-            this.messages.push(message);
+            this.newMessages.push(message);
+            message["to_id"] = this.to.id;
 
             axios.post('/messages', message).then(response => {
                 console.log(response.data);

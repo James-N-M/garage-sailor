@@ -16,7 +16,7 @@ export default {
 
     data() {
         return {
-            newMessage: ''
+            newMessage: 'Hi I was wondering if the following ad....'
         }
     },
 
