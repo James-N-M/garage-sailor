@@ -37,7 +37,7 @@
                 </div>
             </gmap-info-window>
             <gmap-custom-marker
-                v-for="(ad, index) in ads"
+                v-for="(ad, index) in sortedAds"
                 :key="index"
                 :marker="getPosition(ad)"
                 @click.native="handleMarkerClicked(ad)"
@@ -97,26 +97,24 @@ export default {
             this.infoWindowOpened = false;
         },
         calculateRouteSequence() {
-            let waypoints = {};
-            for(let i = 0; i < this.ads.length; i++) {
-                waypoints["destination" + (i + 1)] = `${this.ads[i].latitude},${this.ads[i].longitude}`;
-            }
+            let waypoints = "";
 
             if (!_.isEmpty(this.start) && !_.isEmpty(this.end)) {
-                return axios({
-                    "method": "GET",
-                    "url": "https://wse.api.here.com/2/findsequence.json",
-                    "params": {
-                        "start": `${this.start.latitude},${this.start.longitude}`,
-                        ...waypoints,
-                        "end": `${this.end.latitude},${this.end.longitude}`,
-                        "mode": "fastest;car;traffic:enabled",
-                        "departure": "now",
-                        "app_id": "UopEqQ2s4Nm4G0DVqeRv",
-                        "app_code": process.env.MIX_HERE_KEY
+                let ads = this.ads.filter((ad) => (ad.latitude != this.start.latitude && ad.longitude != this.start.longitude));
+                ads = ads.filter((ad) => (ad.latitude != this.end.latitude && ad.longitude != this.end.longitude));
+
+                for(let i = 0; i < ads.length; i++) {
+                    waypoints += `destination${(i + 1)}=${ads[i].name};${ads[i].latitude},${ads[i].longitude}&`;
+                }
+
+                axios.get('/calculate-shortest-path', {
+                    params: {
+                        start: `${this.start.latitude},${this.start.longitude}`,
+                        waypoints: waypoints,
+                        end: `${this.end.latitude},${this.end.longitude}`,
                     }
                 }).then(response => {
-                    this.waypoints = response.data.results[0].waypoints
+                    this.waypoints = response.data;
                 });
             }
         }
@@ -142,8 +140,7 @@ export default {
             };
         },
         path() {
-            // update to use here path
-            return this.ads.map(function (ad) {
+            return this.sortedAds.map(function (ad) {
                 return {'lat': parseFloat(ad.latitude), 'lng': parseFloat(ad.longitude)};
             });
         },

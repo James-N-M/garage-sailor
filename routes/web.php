@@ -24,6 +24,7 @@ use App\Http\Controllers\UserAdsController;
 use App\Http\Controllers\UserItemsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\CalculateShortestPathController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -59,6 +60,8 @@ Route::group(['middleware' => 'auth'],function () {
 
     Route::post('/planners/{planner}/ads/{ad}', [AdPlannerController::class, 'store']);
     Route::patch('/ad-planner/{planner}', [AdPlannerController::class, 'update']);
+
+    Route::get('/calculate-shortest-path', [CalculateShortestPathController::class, 'index']);
 });
 
 Route::get('/ads', [AdsController::class, 'index'])->name('home');
@@ -67,6 +70,8 @@ Route::get('/categories', [CategoriesController::class, 'index']);
 Route::get('/ads/{ad}', [AdsController::class, 'show']);
 Route::get('/items/{item}', [ItemsController::class, 'show']);
 Route::get('/categories/{category}', [CategoriesController::class, 'show']);
+
+
 
 Auth::routes();
 
