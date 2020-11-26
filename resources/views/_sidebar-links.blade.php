@@ -61,9 +61,9 @@
         <li>
             <a
                 class="mb-2 bg-dark"
-                href="/users"
+                href="/chats"
             >
-                Sailors
+                Messenger
             </a>
     @endauth
 </div>

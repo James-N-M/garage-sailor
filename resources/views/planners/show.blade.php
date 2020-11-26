@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app_two_column')
 
 @section('content')
     <h1>Planner Page</h1>

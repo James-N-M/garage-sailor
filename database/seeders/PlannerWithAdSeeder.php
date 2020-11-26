@@ -16,8 +16,7 @@ class PlannerWithAdSeeder extends Seeder
      */
     public function run()
     {
-        $planner = factory(Planner::class)
-            ->create(['creator_id' => factory(User::class)->create(['email' => 'test@test.com'])->id ]);
+        $planner = factory(Planner::class)->create(['name' => "Sunday Garage Sale Planner", 'creator_id' => 1 ]);
 
         $ad = Ad::find(1);
 
