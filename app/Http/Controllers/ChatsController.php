@@ -22,28 +22,12 @@ class ChatsController extends Controller
      */
     public function index()
     {
-        return view('chat');
+        return view('chats.index');
     }
 
     public function show(User $user)
     {
-        $sentMessages = Message::with('user')
-            ->where('to_id', $user->id)
-            ->where('user_id', Auth::user()->id)
-            ->get();
-
-        $received = Message::with('user')
-            ->where('to_id', Auth::user()->id)
-            ->where('user_id', $user->id)
-            ->get();
-
-        $messages = $sentMessages->merge($received)->sortByDesc(function ($message) {
-            return $message->created_at;
-        });
-
-        $to = $user;
-
-        return view('chats.show', compact('to', 'messages'));
+        return view('chats.show');
     }
 
     /**

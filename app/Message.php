@@ -4,8 +4,8 @@ namespace App;
 
 class Message extends Model
 {
-    public function user()
+    public function fromContact()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasOne(User::class, 'id', 'from_id');
     }
 }
