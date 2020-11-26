@@ -27,7 +27,7 @@ class ChatsController extends Controller
 
     public function show(User $user)
     {
-        return view('chats.show', compact('to', 'messages'));
+        return view('chats.show');
     }
 
     /**
