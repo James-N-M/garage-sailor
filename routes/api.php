@@ -24,3 +24,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/ads', [AdsController::class, 'index']);
 
 Route::get('/contacts', [ContactsController::class, 'index']);
+Route::get('/conversations/{id}', [ContactsController::class, 'getMessagesFor']);

@@ -11,4 +11,12 @@ class ContactsController extends Controller
     {
         return User::all();
     }
+
+    public function getMessagesFor($id)
+    {
+        $messages = Message::where('from_id', $id)->orWhere('to_id', $id)->get();
+
+        return $messages;
+    }
+
 }
