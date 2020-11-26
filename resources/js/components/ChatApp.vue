@@ -17,7 +17,10 @@ export default {
       user: {
           type: Object,
           required: true
-      }
+      },
+        selectedUser: {
+            type: Object,
+        }
     },
     data() {
         return {
@@ -69,6 +72,11 @@ export default {
             .then((response) => {
                 this.contacts = response.data;
             })
+
+        if (this.selectedUser) {
+            this.selectedContact = this.selectedUser;
+            this.startConversationWith(this.selectedContact);
+        }
     }
 }
 </script>
