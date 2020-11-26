@@ -13,7 +13,8 @@ export default {
         };
     },
     methods: {
-        send() {
+        send(e) {
+            e.preventDefault();
             if (this.message === '') {
                 return;
             }
@@ -25,6 +26,13 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.composer textarea {
+    width: 96%;
+    margin: 10px;
+    resize: none;
+    border-radius: 3px;
+    border: 1px solid lightgray;
+    padding: 6px;
+}
 </style>

@@ -28,7 +28,7 @@ export default {
     },
     methods: {
         startConversationWith(contact) {
-            axios.get(`/conversation/${contact.id}`)
+            axios.get(`/api/conversations/${contact.id}`)
                 .then((response) => {
                     this.messages = response.data;
                     this.selectedContact = contact;

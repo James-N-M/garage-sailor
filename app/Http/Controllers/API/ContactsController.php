@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\API;
 
 use App\User;
+use App\Message;
 use App\Http\Controllers\Controller;
 
 class ContactsController extends Controller
 {
     public function index()
     {
-        return User::all();
+        $contacts = User::where('id', '!=', auth()->id())->get();
+
+        return $contacts;
     }
 
     public function getMessagesFor($id)
