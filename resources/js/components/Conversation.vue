@@ -27,6 +27,14 @@ export default {
             if (!this.contact) {
                 return;
             }
+
+            axios.post('/conversations/send', {
+                contact_id : this.contact.id,
+                text: text
+            }).then((response) => {
+                this.$emit('new', response.data);
+            })
+
         }
     }
 }

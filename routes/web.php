@@ -25,6 +25,7 @@ use App\Http\Controllers\UserItemsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CalculateShortestPathController;
+use App\Http\Controllers\ContactsController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -62,6 +63,10 @@ Route::group(['middleware' => 'auth'],function () {
     Route::patch('/ad-planner/{planner}', [AdPlannerController::class, 'update']);
 
     Route::get('/calculate-shortest-path', [CalculateShortestPathController::class, 'index']);
+
+    Route::get('/contacts', [ContactsController::class, 'index']);
+    Route::get('/conversations/{id}', [ContactsController::class, 'getMessagesFor']);
+    Route::post('/conversations/send', [ContactsController::class, 'send']);
 });
 
 Route::get('/ads', [AdsController::class, 'index'])->name('home');
