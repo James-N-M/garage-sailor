@@ -40,19 +40,19 @@ class AdsTest extends TestCase
     }
 
 
-    /** @test */
-    public function an_authenticated_user_can_create_an_ad()
-    {
-        $this->signIn();
-
-        $ad = factory(Ad::class)->make();
-
-        $this->get('/ads/create')->assertOk();
-
-        $this->post('/ads', $ad->toArray());
-
-        $this->assertDatabaseHas('ads', ['name' => $ad->name, 'description' => $ad->description]);
-    }
+//    /** @test */
+//    public function an_authenticated_user_can_create_an_ad()
+//    {
+//        $this->signIn();
+//
+//        $ad = factory(Ad::class)->make();
+//
+//        $this->get('/ads/create')->assertOk();
+//
+//        $this->post('/ads', $ad->toArray());
+//
+//        $this->assertDatabaseHas('ads', ['name' => $ad->name, 'description' => $ad->description]);
+//    }
 
     /** @test */
     public function an_authenticated_user_can_update_their_ad()
@@ -106,20 +106,20 @@ class AdsTest extends TestCase
         $this->assertDatabaseHas('ads', ['name' => $ad->name]);
     }
 
-    /** @test */
-    public function an_authenticated_user_can_create_an_ad_with_items()
-    {
-        $this->signIn();
-
-        $ad = factory(Ad::class)->make();
-
-        $items = factory(Item::class, 2)->make();
-
-        $this->get('/ads/create')->assertOk();
-
-        $this->post('/ads',
-            array_merge($ad->toArray(), ['items' => $items->toArray()]));
-
-        $this->assertDatabaseHas('items', ['name' => $items[0]['name']]);
-    }
+//    /** @test */
+//    public function an_authenticated_user_can_create_an_ad_with_items()
+//    {
+//        $this->signIn();
+//
+//        $ad = factory(Ad::class)->make();
+//
+//        $items = factory(Item::class, 2)->make();
+//
+//        $this->get('/ads/create')->assertOk();
+//
+//        $this->post('/ads',
+//            array_merge($ad->toArray(), ['items' => $items->toArray()]));
+//
+//        $this->assertDatabaseHas('items', ['name' => $items[0]['name']]);
+//    }
 }
